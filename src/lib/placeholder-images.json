@@ -1,3 +1,52 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "achievement-1",
+      "description": "Student winning a science fair",
+      "imageUrl": "https://images.unsplash.com/photo-1554475901-4538ddfbccc2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzY2llbmNlJTIwZmFpcnxlbnwwfHx8fDE3NjE4NDc3ODR8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "science fair"
+    },
+    {
+      "id": "achievement-2",
+      "description": "Student painting a colorful mural",
+      "imageUrl": "https://images.unsplash.com/photo-1756694915450-50c9796fb96d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxzdHVkZW50JTIwcGFpbnRpbmd8ZW58MHx8fHwxNzYxNzU3NDYwfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "student painting"
+    },
+    {
+      "id": "achievement-3",
+      "description": "Students collaborating on a group project",
+      "imageUrl": "https://images.unsplash.com/photo-1760351561007-47e20bd56435?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxzdHVkZW50cyUyMGNvbGxhYm9yYXRpbmd8ZW58MHx8fHwxNzYxNzk5MjI3fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "students collaborating"
+    },
+    {
+      "id": "achievement-4",
+      "description": "Student reading a book in the library",
+      "imageUrl": "https://images.unsplash.com/photo-1610500796385-3ffc1ae2f046?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxzdHVkZW50JTIwcmVhZGluZ3xlbnwwfHx8fDE3NjE4NDA2MTR8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "student reading"
+    },
+    {
+      "id": "avatar-1",
+      "description": "Portrait of a smiling girl",
+      "imageUrl": "https://images.unsplash.com/flagged/photo-1573488808613-d438049c0300?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxzbWlsaW5nJTIwZ2lybHxlbnwwfHx8fDE3NjE3Njc1NDZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "smiling girl"
+    },
+    {
+      "id": "avatar-2",
+      "description": "Portrait of a girl with glasses",
+      "imageUrl": "https://images.unsplash.com/photo-1527285286036-1ae743926077?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxnaXJsJTIwZ2xhc3Nlc3xlbnwwfHx8fDE3NjE4NjgzNjJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "girl glasses"
+    },
+    {
+      "id": "avatar-3",
+      "description": "Portrait of a girl with curly hair",
+      "imageUrl": "https://images.unsplash.com/photo-1569430548104-6ca1cda3ec41?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8Y3VybHklMjBoYWlyfGVufDB8fHx8MTc2MTc5ODU0MHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "curly hair"
+    },
+    {
+      "id": "avatar-4",
+      "description": "Portrait of a happy girl",
+      "imageUrl": "https://images.unsplash.com/photo-1631947430066-48c30d57b943?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxoYXBweSUyMGdpcmx8ZW58MHx8fHwxNzYxODY4MzYxfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "happy girl"
+    }
+  ]
 }
