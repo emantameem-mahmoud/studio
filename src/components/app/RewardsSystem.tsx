@@ -1,4 +1,4 @@
-import { Rocket } from 'lucide-react';
+import { Cpu } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
@@ -18,11 +18,11 @@ export function RewardsSystem() {
         <CardHeader>
           <div className="flex items-center gap-4">
             <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-primary/10">
-                <Rocket className="h-6 w-6 text-primary" />
+                <Cpu className="h-6 w-6 text-primary" />
             </div>
             <div>
-                <CardTitle className="font-headline text-2xl">نظام النقاط والمكافآت</CardTitle>
-                <CardDescription>اجمعي النقاط وتصدري قائمة المتفوقات!</CardDescription>
+                <CardTitle className="font-headline text-2xl">متفوقات قسم الحوسبة</CardTitle>
+                <CardDescription>قائمة بأعلى الطالبات نقاطًا في مشاريع وأنشطة تكنولوجيا المعلومات.</CardDescription>
             </div>
           </div>
         </CardHeader>
