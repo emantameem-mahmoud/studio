@@ -47,6 +47,24 @@
       "description": "Portrait of a happy girl",
       "imageUrl": "https://images.unsplash.com/photo-1631947430066-48c30d57b943?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxoYXBweSUyMGdpcmx8ZW58MHx8fHwxNzYxODY4MzYxfDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "happy girl"
+    },
+    {
+      "id": "it-1",
+      "description": "Students learning to code",
+      "imageUrl": "https://images.unsplash.com/photo-1580894908361-967195033215?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fHN0dWRlbnRzJTIwY29kaW5nfGVufDB8fDB8fHww",
+      "imageHint": "students coding"
+    },
+    {
+      "id": "it-2",
+      "description": "A robot built by students",
+      "imageUrl": "https://images.unsplash.com/photo-1535378917042-10a22c95931a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8cm9ib3R8ZW58MHx8MHx8fDA%3D",
+      "imageHint": "student robot"
+    },
+    {
+      "id": "it-3",
+      "description": "Students working on a 3D printer",
+      "imageUrl": "https://images.unsplash.com/photo-1611606024883-933e5c94d01b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8M2QlMjBwcmludGVyfGVufDB8fDB8fHww",
+      "imageHint": "3d printer"
     }
   ]
 }

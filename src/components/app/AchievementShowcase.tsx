@@ -27,13 +27,6 @@ const achievements = [
     icon: Award,
     image: PlaceHolderImages.find(img => img.id === 'achievement-3'),
   },
-  {
-    title: 'ملكة القراءة',
-    description: 'أتمت قراءة 20 كتاباً خلال شهر واحد في تحدي القراءة.',
-    category: 'القراءة',
-    icon: BookOpen,
-    image: PlaceHolderImages.find(img => img.id === 'achievement-4'),
-  },
 ];
 
 export function AchievementShowcase() {
@@ -44,7 +37,7 @@ export function AchievementShowcase() {
         title="لوحة شرف الإنجازات"
         subtitle="نحتفي هنا بإنجازات طالباتنا المتميزات في مختلف المجالات."
       />
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid sm:grid-cols-1 md:grid-cols-3 gap-6">
         {achievements.map((achievement, index) => (
           <Card key={index} className="overflow-hidden shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
             {achievement.image && (
@@ -73,3 +66,5 @@ export function AchievementShowcase() {
     </section>
   );
 }
+
+    
