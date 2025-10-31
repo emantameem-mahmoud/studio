@@ -3,10 +3,23 @@
 import type { Metadata } from 'next';
 import { Toaster } from "@/components/ui/toaster";
 import { useState, useRef, useEffect } from 'react';
-import { Volume2, VolumeX } from 'lucide-react';
+import { Volume2, VolumeX, Edit, Eye } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Chatbot } from '@/components/app/Chatbot';
+import { EditModeProvider, useEditMode } from '@/context/EditModeContext';
 import './globals.css';
+
+function EditToggleButton() {
+    const { isEditing, toggleEditMode } = useEditMode();
+
+    return (
+        <Button variant="outline" size="icon" onClick={toggleEditMode}>
+            {isEditing ? <Eye className="h-4 w-4" /> : <Edit className="h-4 w-4" />}
+            <span className="sr-only">{isEditing ? 'وضع العرض' : 'وضع التحرير'}</span>
+        </Button>
+    );
+}
+
 
 export default function RootLayout({
   children,
@@ -48,19 +61,24 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet" />
       </head>
       <body className="font-body antialiased">
-        <audio ref={audioRef} autoPlay loop>
-            <source src="https://storage.googleapis.com/proudcity/meccaqatar/uploads/2021/03/State-of-Qatar-National-Anthem-Instrumental.mp3" type="audio/mpeg" />
-            Your browser does not support the audio element.
-        </audio>
-        <div className="fixed bottom-4 right-4 z-50">
-          <Button variant="outline" size="icon" onClick={toggleMute}>
-            {isMuted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
-            <span className="sr-only">{isMuted ? 'إلغاء كتم الصوت' : 'كتم الصوت'}</span>
-          </Button>
-        </div>
-        <Chatbot />
-        {children}
-        <Toaster />
+        <EditModeProvider>
+            <audio ref={audioRef} autoPlay loop>
+                <source src="https://storage.googleapis.com/proudcity/meccaqatar/uploads/2021/03/State-of-Qatar-National-Anthem-Instrumental.mp3" type="audio/mpeg" />
+                Your browser does not support the audio element.
+            </audio>
+             <div className="fixed top-4 left-4 z-50">
+                <EditToggleButton />
+            </div>
+            <div className="fixed bottom-4 right-4 z-50">
+              <Button variant="outline" size="icon" onClick={toggleMute}>
+                {isMuted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
+                <span className="sr-only">{isMuted ? 'إلغاء كتم الصوت' : 'كتم الصوت'}</span>
+              </Button>
+            </div>
+            <Chatbot />
+            {children}
+            <Toaster />
+        </EditModeProvider>
       </body>
     </html>
   );

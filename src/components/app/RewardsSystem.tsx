@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from 'react';
-import { Award, Edit, Save } from 'lucide-react';
+import { Award, Save } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
@@ -9,6 +9,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { cn } from '@/lib/utils';
 import { Input } from '@/components/ui/input';
+import { useEditMode } from '@/context/EditModeContext';
 
 const initialLeaderboardData = {
   'متفوقات الصف الأول': [
@@ -55,7 +56,7 @@ const grades = [
 export function RewardsSystem() {
   const [selectedGrade, setSelectedGrade] = useState<string>(grades[0].name);
   const [leaderboardData, setLeaderboardData] = useState(initialLeaderboardData);
-  const [isEditing, setIsEditing] = useState(false);
+  const { isEditing } = useEditMode();
 
   const handleNameChange = (grade: string, rank: number, newName: string) => {
     setLeaderboardData(prevState => {
@@ -87,10 +88,12 @@ export function RewardsSystem() {
                   <CardDescription>قائمة بأعلى الطالبات نقاطًا في مشاريع وأنشطة تكنولوجيا المعلومات.</CardDescription>
               </div>
             </div>
-            <Button variant="outline" size="icon" onClick={() => setIsEditing(!isEditing)}>
-              {isEditing ? <Save className="h-4 w-4" /> : <Edit className="h-4 w-4" />}
-              <span className="sr-only">{isEditing ? 'حفظ' : 'تعديل'}</span>
-            </Button>
+            {isEditing && (
+                <Button variant="outline" size="icon" onClick={() => {}}>
+                    <Save className="h-4 w-4" />
+                    <span className="sr-only">حفظ</span>
+                </Button>
+            )}
           </div>
         </CardHeader>
         <CardContent className="flex-grow">

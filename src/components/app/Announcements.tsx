@@ -1,10 +1,11 @@
 "use client";
 
 import { useState } from 'react';
-import { Megaphone, Edit, Save } from 'lucide-react';
+import { Megaphone, Save } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
+import { useEditMode } from '@/context/EditModeContext';
 
 const initialAnnouncements = [
   'سيتم عقد ورشة عمل حول الذكاء الاصطناعي يوم الأربعاء المقبل.',
@@ -14,18 +15,12 @@ const initialAnnouncements = [
 
 export function Announcements() {
   const [announcements, setAnnouncements] = useState(initialAnnouncements);
-  const [isEditing, setIsEditing] = useState(false);
+  const { isEditing } = useEditMode();
   const [editText, setEditText] = useState(announcements.join('\n'));
 
   const handleSave = () => {
     setAnnouncements(editText.split('\n').filter(line => line.trim() !== ''));
-    setIsEditing(false);
   };
-
-  const handleEdit = () => {
-    setEditText(announcements.join('\n'));
-    setIsEditing(true);
-  }
 
   return (
     <section id="announcements">
@@ -41,10 +36,12 @@ export function Announcements() {
                 <CardDescription>آخر الأخبار والتحديثات الخاصة بقسم الحوسبة.</CardDescription>
               </div>
             </div>
-            <Button variant="outline" size="icon" onClick={isEditing ? handleSave : handleEdit}>
-              {isEditing ? <Save className="h-4 w-4" /> : <Edit className="h-4 w-4" />}
-              <span className="sr-only">{isEditing ? 'حفظ' : 'تعديل'}</span>
-            </Button>
+            {isEditing && (
+                <Button variant="outline" size="icon" onClick={handleSave}>
+                    <Save className="h-4 w-4" />
+                    <span className="sr-only">حفظ</span>
+                </Button>
+            )}
           </div>
         </CardHeader>
         <CardContent>

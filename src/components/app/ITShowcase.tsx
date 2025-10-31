@@ -2,7 +2,7 @@
 
 import { useState, useRef } from 'react';
 import Image from 'next/image';
-import { Cpu, Bot, Printer, Award, Edit, Save, Upload } from 'lucide-react';
+import { Cpu, Bot, Printer, Award, Save, Upload } from 'lucide-react';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -10,6 +10,7 @@ import { SectionTitle } from './SectionTitle';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { useEditMode } from '@/context/EditModeContext';
 
 const initialItAchievements = [
   {
@@ -37,7 +38,7 @@ const initialItAchievements = [
 
 export function ITShowcase() {
   const [achievements, setAchievements] = useState(initialItAchievements);
-  const [isEditing, setIsEditing] = useState(false);
+  const { isEditing } = useEditMode();
   const fileInputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
 
@@ -85,10 +86,12 @@ export function ITShowcase() {
                 />
             </div>
             <div className="flex-grow text-left">
-                <Button variant="outline" size="icon" onClick={() => setIsEditing(!isEditing)}>
-                    {isEditing ? <Save className="h-4 w-4" /> : <Edit className="h-4 w-4" />}
-                    <span className="sr-only">{isEditing ? 'حفظ' : 'تعديل'}</span>
-                </Button>
+                {isEditing && (
+                    <Button variant="outline" size="icon" onClick={() => {}}>
+                        <Save className="h-4 w-4" />
+                        <span className="sr-only">حفظ</span>
+                    </Button>
+                )}
             </div>
         </div>
       </div>
