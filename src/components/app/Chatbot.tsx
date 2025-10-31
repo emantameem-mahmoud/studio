@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from 'react';
-import { Bot, CornerDownLeft, X, Loader2 } from 'lucide-react';
+import { CornerDownLeft, X, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -12,8 +12,9 @@ const RobotIcon = () => (
     <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-primary-foreground">
         <circle cx="12" cy="12" r="10" fill="hsl(var(--primary))" />
         <path d="M8 14s1.5 2 4 2 4-2 4-2" stroke="hsl(var(--primary-foreground))"/>
-        <path d="M9 9.5c0 .28-.22.5-.5.5S8 9.78 8 9.5s.22-.5.5-.5.5.22.5.5z" fill="hsl(var(--primary-foreground))" stroke="none" />
+        <path d="M9 9.5c0 .28-.22.5-.5.5s-.5-.22-.5-.5.22-.5.5-.5.5.22.5.5z" fill="hsl(var(--primary-foreground))" stroke="none" />
         <path d="M15 9.5c0 .28-.22.5-.5.5s-.5-.22-.5-.5.22-.5.5-.5.5.22.5.5z" fill="hsl(var(--primary-foreground))" stroke="none" />
+        <path d="M10 4.5a2.5 2.5 0 0 1 4 0" stroke="hsl(var(--primary-foreground))" strokeLinecap='round' />
         <path d="M4.93 4.93l-1.41 1.41" />
         <path d="M19.07 4.93l1.41 1.41" />
         <path d="M12 2v2" />
@@ -34,6 +35,7 @@ export function Chatbot() {
 
   const botRef = useRef<HTMLDivElement>(null);
   const chatContentRef = useRef<HTMLDivElement>(null);
+  const chatCardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -42,11 +44,9 @@ export function Chatbot() {
   }, []);
   
   const handleDragStart = (clientX: number, clientY: number, target: EventTarget) => {
-    if (botRef.current?.contains(target as Node) && target !== botRef.current) {
-      if (!isChatOpen) {
-          setIsChatOpen(true);
-      }
-      return;
+    // Prevent dragging if the click is inside the chat window
+    if (chatCardRef.current?.contains(target as Node)) {
+        return;
     }
     if (!position) return;
 
@@ -64,6 +64,8 @@ export function Chatbot() {
 
   const handleDragEnd = () => {
     setIsDragging(false);
+    // Use a timeout to reset hasMoved to allow click event to process
+    setTimeout(() => setHasMoved(false), 0);
   };
 
   const handleMouseDown = (e: React.MouseEvent) => {
@@ -85,12 +87,13 @@ export function Chatbot() {
   const handleClick = (e: React.MouseEvent) => {
      if (hasMoved) {
         e.stopPropagation();
-        setHasMoved(false); // Reset for next click
         return;
      }
-     if (botRef.current?.contains(e.target as Node)) {
-        setIsChatOpen(prev => !prev);
+      // Do not toggle chat if the click is on the chat window itself
+     if (chatCardRef.current?.contains(e.target as Node)) {
+        return;
      }
+     setIsChatOpen(prev => !prev);
   }
 
   const handleSendMessage = async (e: React.FormEvent) => {
@@ -128,8 +131,8 @@ export function Chatbot() {
   return (
     <div
       ref={botRef}
-      className="fixed z-50 cursor-grab"
-      style={{ left: position.x, top: position.y, touchAction: 'none' }}
+      className="fixed z-50"
+      style={{ left: position.x, top: position.y, touchAction: 'none', cursor: isDragging ? 'grabbing' : 'grab' }}
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleDragEnd}
@@ -148,10 +151,11 @@ export function Chatbot() {
 
       {isChatOpen && (
         <Card 
+            ref={chatCardRef}
             className="absolute bottom-full mb-4 w-80 shadow-xl" 
             style={{ right: "calc(50% - 10rem)", cursor: 'default' }}
-            onClick={(e) => e.stopPropagation()} // Prevent card clicks from closing chat
-            onMouseDown={(e) => e.stopPropagation()} // Prevent dragging card
+            onClick={(e) => e.stopPropagation()}
+            onMouseDown={(e) => e.stopPropagation()}
             onTouchStart={(e) => e.stopPropagation()}
         >
           <CardHeader className="flex flex-row items-center justify-between">
