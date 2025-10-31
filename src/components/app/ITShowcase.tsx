@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import Image from 'next/image';
-import { Cpu, Bot, Printer, Award, Edit, Save } from 'lucide-react';
+import { Cpu, Bot, Printer, Award, Edit, Save, Upload } from 'lucide-react';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -38,6 +38,8 @@ const initialItAchievements = [
 export function ITShowcase() {
   const [achievements, setAchievements] = useState(initialItAchievements);
   const [isEditing, setIsEditing] = useState(false);
+  const fileInputRefs = useRef<(HTMLInputElement | null)[]>([]);
+
 
   const handleFieldChange = (index: number, field: string, value: string) => {
     const updatedAchievements = [...achievements];
@@ -50,6 +52,24 @@ export function ITShowcase() {
     }
     setAchievements(updatedAchievements);
   };
+  
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (loadEvent) => {
+        if (loadEvent.target?.result) {
+          handleFieldChange(index, 'imageUrl', loadEvent.target.result as string);
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+  
+  const triggerFileInput = (index: number) => {
+    fileInputRefs.current[index]?.click();
+  };
+
 
   return (
     <section id="it-achievements">
@@ -84,18 +104,22 @@ export function ITShowcase() {
                   className="object-cover"
                   data-ai-hint={achievement.image.imageHint}
                 />
-              </div>
-            )}
-             {isEditing && achievement.image && (
-                <div className="p-2">
-                    <Input
-                        type="text"
-                        placeholder="Image URL"
-                        value={achievement.image.imageUrl}
-                        onChange={(e) => handleFieldChange(index, 'imageUrl', e.target.value)}
-                        className="h-8 text-xs"
+                 {isEditing && (
+                  <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
+                    <Button variant="outline" size="icon" onClick={() => triggerFileInput(index)}>
+                      <Upload className="h-4 w-4" />
+                      <span className="sr-only">Upload Image</span>
+                    </Button>
+                    <input
+                      type="file"
+                      ref={el => fileInputRefs.current[index] = el}
+                      className="hidden"
+                      accept="image/*"
+                      onChange={(e) => handleImageUpload(e, index)}
                     />
-                </div>
+                  </div>
+                )}
+              </div>
             )}
             <CardHeader>
                 {isEditing ? (
