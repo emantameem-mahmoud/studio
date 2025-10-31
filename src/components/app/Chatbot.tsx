@@ -9,20 +9,15 @@ import { chatWithNoura } from '@/ai/flows/chat-with-noura';
 import type { ChatMessage } from '@/ai/schema/chat-with-noura';
 
 const RobotIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary-foreground">
-        <path d="M12 8V4H8v4Z" fill="currentColor" />
-        <path d="M16 8V4h-4v4Z" fill="currentColor" />
-        <path d="M12 14v-4h4v4Z" />
-        <path d="M8 10v4h4v-4Z" />
-        <path d="m14 20-2-2-2 2" />
-        <path d="M18 10h4v4h-4Z" />
-        <path d="M2 10h4v4H2Z" />
-        <path d="M10 18v-2a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v2" />
-        <path d="M12 2a2 2 0 0 1 2 2v1H10V4a2 2 0 0 1 2-2Z" />
-        <path d="M14 14a2 2 0 0 0-2-2h0a2 2 0 0 0-2 2" />
-        <circle cx="9" cy="12" r="1" fill="white" />
-        <circle cx="15" cy="12" r="1" fill="white" />
-        <path d="M9.5 16h5" />
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-primary-foreground">
+        <circle cx="12" cy="12" r="10" fill="hsl(var(--primary))" />
+        <path d="M8 14s1.5 2 4 2 4-2 4-2" stroke="hsl(var(--primary-foreground))"/>
+        <line x1="9" y1="9" x2="9.01" y2="9" stroke="hsl(var(--primary-foreground))" strokeWidth="2.5" strokeLinecap='round' />
+        <line x1="15" y1="9" x2="15.01" y2="9" stroke="hsl(var(--primary-foreground))" strokeWidth="2.5" strokeLinecap='round'/>
+        <path d="M4.93 4.93l-1.41 1.41" />
+        <path d="M19.07 4.93l1.41 1.41" />
+        <path d="M12 2v2" />
+        <path d="M12 20v2" />
     </svg>
 );
 
@@ -40,7 +35,10 @@ export function Chatbot() {
   const chatContentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    setPosition({ x: 50, y: window.innerHeight - 150 });
+    // Initialize position on the client side only
+    if (typeof window !== 'undefined') {
+      setPosition({ x: 50, y: window.innerHeight - 150 });
+    }
   }, []);
   
   const handleMouseDown = (e: React.MouseEvent) => {
@@ -118,7 +116,7 @@ export function Chatbot() {
       onClick={handleClick}
     >
       <div className={`transition-transform duration-300 ${isDragging ? 'scale-110' : ''}`}>
-        <div className="w-20 h-20 bg-primary rounded-full flex items-center justify-center shadow-2xl border-4 border-white">
+        <div className="w-20 h-20 rounded-full flex items-center justify-center">
           <RobotIcon />
         </div>
         <div className="absolute top-0 right-0 -mt-2 -mr-2 w-8 h-8 bg-accent text-accent-foreground rounded-full flex items-center justify-center text-xs font-bold">نورة</div>
