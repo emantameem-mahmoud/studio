@@ -10,15 +10,13 @@ import type { ChatMessage } from '@/ai/schema/chat-with-noura';
 
 const RobotIcon = () => (
     <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-primary-foreground">
-        <circle cx="12" cy="12" r="10" fill="hsl(340 82% 94%)" />
+        <circle cx="12" cy="12" r="10" fill="hsl(340 82% 85%)" />
         <path d="M8 14s1.5 2 4 2 4-2 4-2" stroke="hsl(var(--foreground))"/>
         <path d="M9 9.5c0 .28-.22.5-.5.5s-.5-.22-.5-.5.22-.5.5-.5.5.22.5.5z" fill="hsl(var(--foreground))" stroke="none" />
         <path d="M15 9.5c0 .28-.22.5-.5.5s-.5-.22-.5-.5.22-.5.5-.5.5.22.5.5z" fill="hsl(var(--foreground))" stroke="none" />
         <path d="M10 4.5a2.5 2.5 0 0 1 4 0" stroke="hsl(var(--foreground))" strokeLinecap='round' />
-        <path d="M4.93 4.93l-1.41 1.41" />
-        <path d="M19.07 4.93l1.41 1.41" />
-        <path d="M12 2v2" />
-        <path d="M12 20v2" />
+        <path d="M12 12m-4 0a4 4 0 1 0 8 0a-4 -4 0 1 0 -8 0" fill="white" />
+        <path d="M12 12m-1 0a1 1 0 1 0 2 0a-1 -1 0 1 0 -2 0" fill="black" />
     </svg>
 );
 

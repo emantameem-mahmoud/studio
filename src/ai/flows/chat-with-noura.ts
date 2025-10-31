@@ -35,7 +35,7 @@ const chatWithNouraFlow = ai.defineFlow(
     },
     async (input) => {
         const { output } = await nouraPrompt(input);
-        return output || "أ抱歉،我不太明白。你能再说一遍吗？"; // Fallback response in Arabic
+        return output || "عذراً، لم أفهم. هل يمكنك إعادة الصياغة؟"; // Fallback response in Arabic
     }
 );
 

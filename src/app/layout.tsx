@@ -26,14 +26,15 @@ export default function RootLayout({
   // No metadata export from a client component
   // We can set it in the head as a workaround
   useEffect(() => {
-    document.title = "Northern Star Achievers";
+    document.title = "إنجازات نجمات الشمال";
     const descriptionMeta = document.querySelector('meta[name="description"]');
+    const newDescription = "تطبيق ويب لمدرسة الشمال الابتدائية للبنات لعرض إنجازات الطالبات";
     if (descriptionMeta) {
-      descriptionMeta.setAttribute('content', 'Fostering success at Northern Elementary School for Girls');
+      descriptionMeta.setAttribute('content', newDescription);
     } else {
       const meta = document.createElement('meta');
       meta.name = 'description';
-      meta.content = 'Fostering success at Northern Elementary School for Girls';
+      meta.content = newDescription;
       document.head.appendChild(meta);
     }
   }, []);
@@ -48,7 +49,7 @@ export default function RootLayout({
       </head>
       <body className="font-body antialiased">
         <audio ref={audioRef} autoPlay loop>
-            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg" />
+            <source src="https://storage.googleapis.com/proudcity/meccaqatar/uploads/2021/03/State-of-Qatar-National-Anthem-Instrumental.mp3" type="audio/mpeg" />
             Your browser does not support the audio element.
         </audio>
         <div className="fixed bottom-4 right-4 z-50">

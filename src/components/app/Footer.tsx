@@ -12,8 +12,8 @@ export function Footer() {
           </div>
         </div>
         <div className="flex justify-between items-center">
-          <p>إعداد:معلمة الحاسوب: إيمان محمود</p>
           <p>منسقة الحاسوب: زينب محمد</p>
+          <p>إعداد: معلمة الحاسوب: إيمان محمود</p>
         </div>
       </div>
     </footer>

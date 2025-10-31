@@ -11,32 +11,32 @@ import { cn } from '@/lib/utils';
 import { Input } from '@/components/ui/input';
 
 const initialLeaderboardData = {
-  'الصف الأول': [
+  'متفوقات الصف الأول': [
     { rank: 1, student: 'مريم', points: 1300, avatarId: 'avatar-1' },
     { rank: 2, student: 'عائشة', points: 1210, avatarId: 'avatar-2' },
     { rank: 3, student: 'زينب', points: 1050, avatarId: 'avatar-3' },
   ],
-  'الصف الثاني': [
+  'متفوقات الصف الثاني': [
     { rank: 1, student: 'نورة', points: 1250, avatarId: 'avatar-1' },
     { rank: 2, student: 'فاطمة', points: 1100, avatarId: 'avatar-2' },
     { rank: 3, student: 'سارة', points: 980, avatarId: 'avatar-3' },
   ],
-  'الصف الثالث': [
+  'متفوقات الصف الثالث': [
     { rank: 1, student: 'هند', points: 1400, avatarId: 'avatar-4' },
     { rank: 2, student: 'دانه', points: 1320, avatarId: 'avatar-1' },
     { rank: 3, student: 'شوق', points: 1150, avatarId: 'avatar-2' },
   ],
-  'الصف الرابع': [
+  'متفوقات الصف الرابع': [
     { rank: 1, student: 'الجازي', points: 1550, avatarId: 'avatar-3' },
     { rank: 2, student: 'العنود', points: 1480, avatarId: 'avatar-4' },
     { rank: 3, student: 'منيرة', points: 1390, avatarId: 'avatar-1' },
   ],
-  'الصف الخامس': [
+  'متفوقات الصف الخامس': [
     { rank: 1, student: 'حصة', points: 1620, avatarId: 'avatar-2' },
     { rank: 2, student: 'لولوة', points: 1540, avatarId: 'avatar-3' },
     { rank: 3, student: 'وضحى', points: 1470, avatarId: 'avatar-4' },
   ],
-  'الصف السادس': [
+  'متفوقات الصف السادس': [
     { rank: 1, student: 'شيخة', points: 1800, avatarId: 'avatar-1' },
     { rank: 2, student: 'موزة', points: 1750, avatarId: 'avatar-2' },
     { rank: 3, student: 'غالية', points: 1680, avatarId: 'avatar-3' },
@@ -44,12 +44,12 @@ const initialLeaderboardData = {
 };
 
 const grades = [
-  { name: 'الصف الأول', color: 'bg-blue-200 hover:bg-blue-300', textColor: 'text-blue-800'},
-  { name: 'الصف الثاني', color: 'bg-green-200 hover:bg-green-300', textColor: 'text-green-800' },
-  { name: 'الصف الثالث', color: 'bg-yellow-200 hover:bg-yellow-300', textColor: 'text-yellow-800' },
-  { name: 'الصف الرابع', color: 'bg-purple-200 hover:bg-purple-300', textColor: 'text-purple-800' },
-  { name: 'الصف الخامس', color: 'bg-pink-200 hover:bg-pink-300', textColor: 'text-pink-800' },
-  { name: 'الصف السادس', color: 'bg-indigo-200 hover:bg-indigo-300', textColor: 'text-indigo-800' },
+  { name: 'متفوقات الصف الأول', color: 'bg-blue-200 hover:bg-blue-300', textColor: 'text-blue-800'},
+  { name: 'متفوقات الصف الثاني', color: 'bg-green-200 hover:bg-green-300', textColor: 'text-green-800' },
+  { name: 'متفوقات الصف الثالث', color: 'bg-yellow-200 hover:bg-yellow-300', textColor: 'text-yellow-800' },
+  { name: 'متفوقات الصف الرابع', color: 'bg-purple-200 hover:bg-purple-300', textColor: 'text-purple-800' },
+  { name: 'متفوقات الصف الخامس', color: 'bg-pink-200 hover:bg-pink-300', textColor: 'text-pink-800' },
+  { name: 'متفوقات الصف السادس', color: 'bg-indigo-200 hover:bg-indigo-300', textColor: 'text-indigo-800' },
 ];
 
 export function RewardsSystem() {
