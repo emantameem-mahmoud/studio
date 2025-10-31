@@ -48,7 +48,7 @@ export default function RootLayout({
       </head>
       <body className="font-body antialiased">
         <audio ref={audioRef} autoPlay loop>
-            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3" type="audio/mpeg" />
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg" />
             Your browser does not support the audio element.
         </audio>
         <div className="fixed bottom-4 right-4 z-50">
