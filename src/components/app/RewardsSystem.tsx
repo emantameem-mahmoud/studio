@@ -1,15 +1,16 @@
 "use client";
 
 import { useState } from 'react';
-import { Cpu } from 'lucide-react';
+import { Award, Edit, Save } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { cn } from '@/lib/utils';
+import { Input } from '@/components/ui/input';
 
-const leaderboardData = {
+const initialLeaderboardData = {
   'الصف الأول': [
     { rank: 1, student: 'مريم', points: 1300, avatarId: 'avatar-1' },
     { rank: 2, student: 'عائشة', points: 1210, avatarId: 'avatar-2' },
@@ -53,6 +54,22 @@ const grades = [
 
 export function RewardsSystem() {
   const [selectedGrade, setSelectedGrade] = useState<string>(grades[0]);
+  const [leaderboardData, setLeaderboardData] = useState(initialLeaderboardData);
+  const [isEditing, setIsEditing] = useState(false);
+
+  const handleNameChange = (grade: string, rank: number, newName: string) => {
+    setLeaderboardData(prevState => {
+      const newState = { ...prevState };
+      const gradeKey = grade as keyof typeof prevState;
+      const gradeData = [...newState[gradeKey]];
+      const studentIndex = gradeData.findIndex(s => s.rank === rank);
+      if (studentIndex !== -1) {
+        gradeData[studentIndex] = { ...gradeData[studentIndex], student: newName };
+        return { ...newState, [gradeKey]: gradeData };
+      }
+      return newState;
+    });
+  };
 
   const leaderboard = leaderboardData[selectedGrade as keyof typeof leaderboardData] || [];
 
@@ -60,14 +77,20 @@ export function RewardsSystem() {
     <section id="rewards">
       <Card className="shadow-lg h-full flex flex-col">
         <CardHeader>
-          <div className="flex items-center gap-4">
-            <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-primary/10">
-                <Cpu className="h-6 w-6 text-primary" />
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-primary/10">
+                  <Award className="h-6 w-6 text-primary" />
+              </div>
+              <div>
+                  <CardTitle className="font-headline text-2xl">متفوقات قسم الحوسبة</CardTitle>
+                  <CardDescription>قائمة بأعلى الطالبات نقاطًا في مشاريع وأنشطة تكنولوجيا المعلومات.</CardDescription>
+              </div>
             </div>
-            <div>
-                <CardTitle className="font-headline text-2xl">متفوقات قسم الحوسبة</CardTitle>
-                <CardDescription>قائمة بأعلى الطالبات نقاطًا في مشاريع وأنشطة تكنولوجيا المعلومات.</CardDescription>
-            </div>
+            <Button variant="outline" size="icon" onClick={() => setIsEditing(!isEditing)}>
+              {isEditing ? <Save className="h-4 w-4" /> : <Edit className="h-4 w-4" />}
+              <span className="sr-only">{isEditing ? 'حفظ' : 'تعديل'}</span>
+            </Button>
           </div>
         </CardHeader>
         <CardContent className="flex-grow">
@@ -109,7 +132,16 @@ export function RewardsSystem() {
                                     )}
                                     <AvatarFallback>{player.student.charAt(0)}</AvatarFallback>
                                 </Avatar>
-                                <span className="font-medium">{player.student}</span>
+                                {isEditing ? (
+                                  <Input 
+                                    type="text"
+                                    value={player.student}
+                                    onChange={(e) => handleNameChange(selectedGrade, player.rank, e.target.value)}
+                                    className="h-8"
+                                  />
+                                ) : (
+                                  <span className="font-medium">{player.student}</span>
+                                )}
                             </div>
                         </TableCell>
                         <TableCell className="text-left font-bold text-primary">{player.points}</TableCell>

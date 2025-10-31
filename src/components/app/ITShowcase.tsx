@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Cpu, Bot, Printer } from 'lucide-react';
+import { Cpu, Bot, Printer, Award } from 'lucide-react';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -33,7 +33,7 @@ export function ITShowcase() {
   return (
     <section id="it-achievements">
       <SectionTitle
-        icon={Cpu}
+        icon={Award}
         title="إنجازات الحوسبة وتكنولوجيا المعلومات"
         subtitle="نستعرض هنا أبرز مشاريع وإبداعات طالباتنا في المجال التقني."
       />
@@ -66,5 +66,3 @@ export function ITShowcase() {
     </section>
   );
 }
-
-    
