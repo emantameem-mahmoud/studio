@@ -12,9 +12,12 @@ export function Header() {
             مدرسة الشمال الابتدائية للبنات
           </h1>
         </div>
-        <div className="mt-2 text-center">
-          <p className="text-sm text-muted-foreground">مديرة المدرسة: مريم مبارك الحسيني</p>
-          <p className="text-2xl font-headline font-bold text-foreground/90 mt-1">إنجازات نجمات الشمال</p>
+        <div className="mt-2 text-center w-full">
+            <div className="flex justify-between items-center">
+                <p className="text-lg font-body text-muted-foreground">مديرة المدرسة: مريم مبارك الحسيني</p>
+                <p className="text-2xl font-headline font-bold text-foreground/90 mt-1 flex-grow text-center">إنجازات نجمات الشمال</p>
+                <div className="w-48"></div>
+            </div>
         </div>
       </div>
     </header>
