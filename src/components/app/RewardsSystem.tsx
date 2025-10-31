@@ -44,16 +44,16 @@ const initialLeaderboardData = {
 };
 
 const grades = [
-  'الصف الأول',
-  'الصف الثاني',
-  'الصف الثالث',
-  'الصف الرابع',
-  'الصف الخامس',
-  'الصف السادس',
+  { name: 'الصف الأول', color: 'bg-blue-200 hover:bg-blue-300', textColor: 'text-blue-800'},
+  { name: 'الصف الثاني', color: 'bg-green-200 hover:bg-green-300', textColor: 'text-green-800' },
+  { name: 'الصف الثالث', color: 'bg-yellow-200 hover:bg-yellow-300', textColor: 'text-yellow-800' },
+  { name: 'الصف الرابع', color: 'bg-purple-200 hover:bg-purple-300', textColor: 'text-purple-800' },
+  { name: 'الصف الخامس', color: 'bg-pink-200 hover:bg-pink-300', textColor: 'text-pink-800' },
+  { name: 'الصف السادس', color: 'bg-indigo-200 hover:bg-indigo-300', textColor: 'text-indigo-800' },
 ];
 
 export function RewardsSystem() {
-  const [selectedGrade, setSelectedGrade] = useState<string>(grades[0]);
+  const [selectedGrade, setSelectedGrade] = useState<string>(grades[0].name);
   const [leaderboardData, setLeaderboardData] = useState(initialLeaderboardData);
   const [isEditing, setIsEditing] = useState(false);
 
@@ -97,15 +97,17 @@ export function RewardsSystem() {
           <div className="flex flex-wrap justify-center gap-2 mb-6">
             {grades.map((grade) => (
               <Button
-                key={grade}
-                variant={selectedGrade === grade ? 'default' : 'outline'}
-                onClick={() => setSelectedGrade(grade)}
+                key={grade.name}
+                variant={selectedGrade === grade.name ? 'default' : 'outline'}
+                onClick={() => setSelectedGrade(grade.name)}
                 className={cn(
                   "transition-all",
-                  selectedGrade === grade ? 'bg-primary text-primary-foreground' : 'bg-transparent'
+                  selectedGrade === grade.name
+                    ? 'bg-primary text-primary-foreground'
+                    : `${grade.color} ${grade.textColor} border-transparent`
                 )}
               >
-                {grade}
+                {grade.name}
               </Button>
             ))}
           </div>
