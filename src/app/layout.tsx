@@ -50,7 +50,7 @@ export default function RootLayout({
             <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3" type="audio/mpeg" />
             Your browser does not support the audio element.
         </audio>
-        <div className="fixed bottom-4 left-4 z-50">
+        <div className="fixed bottom-4 right-4 z-50">
           <Button variant="outline" size="icon" onClick={toggleMute}>
             {isMuted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
             <span className="sr-only">{isMuted ? 'إلغاء كتم الصوت' : 'كتم الصوت'}</span>
