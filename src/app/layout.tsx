@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { useState, useRef, useEffect } from 'react';
 import { Volume2, VolumeX } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Chatbot } from '@/components/app/Chatbot';
 import './globals.css';
 
 export default function RootLayout({
@@ -56,6 +57,7 @@ export default function RootLayout({
             <span className="sr-only">{isMuted ? 'إلغاء كتم الصوت' : 'كتم الصوت'}</span>
           </Button>
         </div>
+        <Chatbot />
         {children}
         <Toaster />
       </body>
