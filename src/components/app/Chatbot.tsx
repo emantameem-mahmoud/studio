@@ -12,8 +12,8 @@ const RobotIcon = () => (
     <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-primary-foreground">
         <circle cx="12" cy="12" r="10" fill="hsl(var(--primary))" />
         <path d="M8 14s1.5 2 4 2 4-2 4-2" stroke="hsl(var(--primary-foreground))"/>
-        <line x1="9" y1="9" x2="9.01" y2="9" stroke="hsl(var(--primary-foreground))" strokeWidth="2.5" strokeLinecap='round' />
-        <line x1="15" y1="9" x2="15.01" y2="9" stroke="hsl(var(--primary-foreground))" strokeWidth="2.5" strokeLinecap='round'/>
+        <path d="M9 9.5c0 .28-.22.5-.5.5S8 9.78 8 9.5s.22-.5.5-.5.5.22.5.5z" fill="hsl(var(--primary-foreground))" stroke="none" />
+        <path d="M15 9.5c0 .28-.22.5-.5.5s-.5-.22-.5-.5.22-.5.5-.5.5.22.5.5z" fill="hsl(var(--primary-foreground))" stroke="none" />
         <path d="M4.93 4.93l-1.41 1.41" />
         <path d="M19.07 4.93l1.41 1.41" />
         <path d="M12 2v2" />
@@ -30,45 +30,66 @@ export function Chatbot() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [hasMoved, setHasMoved] = useState(false);
 
   const botRef = useRef<HTMLDivElement>(null);
   const chatContentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Initialize position on the client side only
     if (typeof window !== 'undefined') {
       setPosition({ x: 50, y: window.innerHeight - 150 });
     }
   }, []);
   
-  const handleMouseDown = (e: React.MouseEvent) => {
-    // Prevent dragging on child elements of the chat window
-    if (e.target !== botRef.current && botRef.current?.contains(e.target as Node)) {
-        if (!isChatOpen) {
-            setIsChatOpen(true);
-        }
-       return;
+  const handleDragStart = (clientX: number, clientY: number, target: EventTarget) => {
+    if (botRef.current?.contains(target as Node) && target !== botRef.current) {
+      if (!isChatOpen) {
+          setIsChatOpen(true);
+      }
+      return;
     }
     if (!position) return;
+
     setIsDragging(true);
-    setDragStart({ x: e.clientX - position.x, y: e.clientY - position.y });
+    setHasMoved(false);
+    setDragStart({ x: clientX - position.x, y: clientY - position.y });
+  };
+  
+  const handleDragMove = (clientX: number, clientY: number) => {
+    if (isDragging) {
+        if (!hasMoved) setHasMoved(true);
+        setPosition({ x: clientX - dragStart.x, y: clientY - dragStart.y });
+    }
+  };
+
+  const handleDragEnd = () => {
+    setIsDragging(false);
+  };
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    handleDragStart(e.clientX, e.clientY, e.target);
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
-    if (isDragging) {
-      setPosition({ x: e.clientX - dragStart.x, y: e.clientY - dragStart.y });
-    }
+    handleDragMove(e.clientX, e.clientY);
   };
 
-  const handleMouseUp = () => {
-    setIsDragging(false);
+  const handleTouchStart = (e: React.TouchEvent) => {
+    handleDragStart(e.touches[0].clientX, e.touches[0].clientY, e.target);
+  };
+  
+  const handleTouchMove = (e: React.TouchEvent) => {
+    handleDragMove(e.touches[0].clientX, e.touches[0].clientY);
   };
   
   const handleClick = (e: React.MouseEvent) => {
-     if (e.target === botRef.current || botRef.current?.contains(e.target as Node)) {
-         if (!isDragging) {
-            setIsChatOpen(prev => !prev);
-         }
+     if (hasMoved) {
+        e.stopPropagation();
+        setHasMoved(false); // Reset for next click
+        return;
+     }
+     if (botRef.current?.contains(e.target as Node)) {
+        setIsChatOpen(prev => !prev);
      }
   }
 
@@ -108,11 +129,14 @@ export function Chatbot() {
     <div
       ref={botRef}
       className="fixed z-50 cursor-grab"
-      style={{ left: position.x, top: position.y }}
+      style={{ left: position.x, top: position.y, touchAction: 'none' }}
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
-      onMouseLeave={handleMouseUp}
+      onMouseUp={handleDragEnd}
+      onMouseLeave={handleDragEnd}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleDragEnd}
       onClick={handleClick}
     >
       <div className={`transition-transform duration-300 ${isDragging ? 'scale-110' : ''}`}>
@@ -123,10 +147,16 @@ export function Chatbot() {
       </div>
 
       {isChatOpen && (
-        <Card className="absolute bottom-full mb-4 w-80 shadow-xl" style={{ right: "calc(50% - 10rem)"}}>
+        <Card 
+            className="absolute bottom-full mb-4 w-80 shadow-xl" 
+            style={{ right: "calc(50% - 10rem)", cursor: 'default' }}
+            onClick={(e) => e.stopPropagation()} // Prevent card clicks from closing chat
+            onMouseDown={(e) => e.stopPropagation()} // Prevent dragging card
+            onTouchStart={(e) => e.stopPropagation()}
+        >
           <CardHeader className="flex flex-row items-center justify-between">
             <CardTitle>مرحباً، أنا نورة!</CardTitle>
-            <Button variant="ghost" size="icon" onClick={() => setIsChatOpen(false)}>
+            <Button variant="ghost" size="icon" onClick={(e) => { e.stopPropagation(); setIsChatOpen(false); }}>
               <X className="h-4 w-4" />
             </Button>
           </CardHeader>
